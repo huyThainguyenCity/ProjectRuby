@@ -1,0 +1,2 @@
+module SignIns::OmniauthCallbacksHelper
+end
