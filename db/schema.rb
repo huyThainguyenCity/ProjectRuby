@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_28_080351) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_032021) do
   create_table "answers", force: :cascade do |t|
     t.integer "questions_id", null: false
     t.boolean "is_correct"
@@ -60,6 +60,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_080351) do
     t.index ["exams_id"], name: "index_questions_on_exams_id"
   end
 
+  create_table "sign_ins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.index ["email"], name: "index_sign_ins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_sign_ins_on_reset_password_token", unique: true
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -82,7 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_28_080351) do
     t.string "last_name"
     t.string "email"
     t.integer "password"
-    t.boolean "is_admin"
+    t.boolean "is_Admin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
