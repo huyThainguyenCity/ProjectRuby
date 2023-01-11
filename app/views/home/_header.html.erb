@@ -17,6 +17,10 @@
     </div>
     <button><i class="material-icons">circle_notifications</i></button>
     <button><i class="material-icons">account_circles</i></button>
+    <% if current_sign_in.present? %> 
+    <%= link_to "Profile" , current_sign_in.profile %>
+    <% end %> 
+    
     </div>
   </div>
 </nav>
