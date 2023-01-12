@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_111333) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_12_074105) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -80,37 +80,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_111333) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.integer "sign_in_id", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.datetime "birthday"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["sign_in_id"], name: "index_profiles_on_sign_in_id"
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.integer "exams_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exams_id"], name: "index_questions_on_exams_id"
-  end
-
-  create_table "sign_ins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
-    t.index ["email"], name: "index_sign_ins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_sign_ins_on_reset_password_token", unique: true
   end
 
   create_table "tags", force: :cascade do |t|
@@ -133,11 +108,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_111333) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
-    t.integer "password"
-    t.boolean "is_Admin"
+    t.string "phone_number"
+    t.datetime "birthday"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -147,7 +128,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_111333) do
   add_foreign_key "exam_answers", "questions", column: "questions_id"
   add_foreign_key "exam_tags", "exams", column: "exams_id"
   add_foreign_key "exam_tags", "tags", column: "tags_id"
-  add_foreign_key "profiles", "sign_ins"
   add_foreign_key "questions", "exams", column: "exams_id"
   add_foreign_key "user_exams", "exam_answers", column: "exam_answers_id"
   add_foreign_key "user_exams", "exams", column: "exams_id"
