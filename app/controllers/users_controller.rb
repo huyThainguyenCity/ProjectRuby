@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     end
 
     def update
-        current_user
         if current_user.update(user_params)
         redirect_to current_user
         else
