@@ -4,13 +4,18 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.create! user_params.require(:user)
-        @user.image.attach(params[:user][:image])
-        redirect_to user 
+        @user = User.new(user_params)
+         
+        if @user.save
+            redirect_to @user
+        else
+            flash[:error] = "Fail to create user"
+            render "show"
+        end
     end
 
     def edit
-        @user = User.find(params[:id])
+        
     end
 
     def update
