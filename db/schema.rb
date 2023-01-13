@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_070035) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,12 +40,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_070035) do
   end
 
   create_table "answers", force: :cascade do |t|
-    t.integer "questions_id", null: false
-    t.boolean "is_correct"
+    t.integer "question_id", null: false
+    t.boolean "is_correct", default: true
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["questions_id"], name: "index_answers_on_questions_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
   create_table "exam_answers", force: :cascade do |t|
@@ -74,18 +74,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_070035) do
     t.integer "time_out"
     t.string "image"
     t.integer "mark"
-    t.datetime "start_at"
-    t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
     t.string "title"
-    t.integer "exams_id", null: false
+    t.integer "exam_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exams_id"], name: "index_questions_on_exams_id"
+    t.index ["exam_id"], name: "index_questions_on_exam_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -123,12 +121,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_070035) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "answers", "questions", column: "questions_id"
+  add_foreign_key "answers", "questions"
   add_foreign_key "exam_answers", "answers", column: "answers_id"
   add_foreign_key "exam_answers", "questions", column: "questions_id"
   add_foreign_key "exam_tags", "exams", column: "exams_id"
   add_foreign_key "exam_tags", "tags", column: "tags_id"
-  add_foreign_key "questions", "exams", column: "exams_id"
+  add_foreign_key "questions", "exams"
   add_foreign_key "user_exams", "exam_answers", column: "exam_answers_id"
   add_foreign_key "user_exams", "exams", column: "exams_id"
   add_foreign_key "user_exams", "users", column: "users_id"

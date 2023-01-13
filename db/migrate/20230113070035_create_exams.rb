@@ -8,8 +8,6 @@ class CreateExams < ActiveRecord::Migration[7.0]
       t.integer :time_out
       t.string :image
       t.integer :mark
-      t.datetime :start_at
-      t.datetime :end_at
       t.timestamps
     end
   end
