@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_16_100326) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,21 +49,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
   end
 
   create_table "exam_answers", force: :cascade do |t|
-    t.integer "questions_id", null: false
-    t.integer "answers_id", null: false
+    t.integer "question_id", null: false
+    t.integer "answer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["answers_id"], name: "index_exam_answers_on_answers_id"
-    t.index ["questions_id"], name: "index_exam_answers_on_questions_id"
+    t.index ["answer_id"], name: "index_exam_answers_on_answer_id"
+    t.index ["question_id"], name: "index_exam_answers_on_question_id"
   end
 
   create_table "exam_tags", force: :cascade do |t|
-    t.integer "tags_id", null: false
-    t.integer "exams_id", null: false
+    t.integer "tag_id", null: false
+    t.integer "exam_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exams_id"], name: "index_exam_tags_on_exams_id"
-    t.index ["tags_id"], name: "index_exam_tags_on_tags_id"
+    t.index ["exam_id"], name: "index_exam_tags_on_exam_id"
+    t.index ["tag_id"], name: "index_exam_tags_on_tag_id"
   end
 
   create_table "exams", force: :cascade do |t|
@@ -86,6 +86,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
     t.index ["exam_id"], name: "index_questions_on_exam_id"
   end
 
+  create_table "sign_ins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_sign_ins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_sign_ins_on_reset_password_token", unique: true
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -93,25 +105,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
   end
 
   create_table "user_exams", force: :cascade do |t|
-    t.integer "users_id", null: false
-    t.integer "exams_id", null: false
-    t.integer "exam_answers_id", null: false
+    t.integer "user_id", null: false
+    t.integer "exam_id", null: false
+    t.integer "exam_answer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["exam_answers_id"], name: "index_user_exams_on_exam_answers_id"
-    t.index ["exams_id"], name: "index_user_exams_on_exams_id"
-    t.index ["users_id"], name: "index_user_exams_on_users_id"
+    t.index ["exam_answer_id"], name: "index_user_exams_on_exam_answer_id"
+    t.index ["exam_id"], name: "index_user_exams_on_exam_id"
+    t.index ["user_id"], name: "index_user_exams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
     t.datetime "birthday"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -122,12 +132,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_13_111350) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
-  add_foreign_key "exam_answers", "answers", column: "answers_id"
-  add_foreign_key "exam_answers", "questions", column: "questions_id"
-  add_foreign_key "exam_tags", "exams", column: "exams_id"
-  add_foreign_key "exam_tags", "tags", column: "tags_id"
+  add_foreign_key "exam_answers", "answers"
+  add_foreign_key "exam_answers", "questions"
+  add_foreign_key "exam_tags", "exams"
+  add_foreign_key "exam_tags", "tags"
   add_foreign_key "questions", "exams"
-  add_foreign_key "user_exams", "exam_answers", column: "exam_answers_id"
-  add_foreign_key "user_exams", "exams", column: "exams_id"
-  add_foreign_key "user_exams", "users", column: "users_id"
+  add_foreign_key "user_exams", "exam_answers"
+  add_foreign_key "user_exams", "exams"
+  add_foreign_key "user_exams", "users"
 end

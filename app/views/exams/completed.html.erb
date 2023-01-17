@@ -1,3 +1,5 @@
+<h1> Ngoc ngo </h1>
+
 <nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="exams">Exam</a></li>
@@ -6,16 +8,16 @@
   </ol>
 </nav>
 
-<h1> New examination </h1>
+<h1> Completed </h1>
 
 <div class="row row-cols-md-3 g-4">
-<% @exams.each do |exam| %>
+<% @completes.each do |complete| %>
   <div class="col">
     <div class="card h-100">
-      <img src="<%= exam.image %>" class="card-img-top" alt="...">
+      <img src="<%= complete.image %>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= exam.name %></h5>
-        <p class="card-text"><%= exam.short_description %></p>
+        <h5 class="card-title"><%= complete.name %></h5>
+        <p class="card-text"><%= complete.short_description %></p>
       </div>
       <div class="card-footer">
           <a href="#" class="btn btn-primary">Learn more</a>
@@ -24,18 +26,18 @@
   </div>
   <% end %>
 </div>
-<%= will_paginate @exams %>
+<%= will_paginate @completes %>
 
-<h1> Most popular </h1>
+<h1> Most related </h1>
 
 <div class="row row-cols-md-3 g-4">
-<% @most_populars.each do |most_popular| %>
+<% @most_relates.each do |most_relate| %>
   <div class="col">
     <div class="card h-100">
-      <img src="<%= most_popular.image %>" class="card-img-top" alt="...">
+      <img src="<%= most_relate.image %>" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= most_popular.name %></h5>
-        <p class="card-text"><%= most_popular.short_description %></p>
+        <h5 class="card-title"><%= most_relate.name %></h5>
+        <p class="card-text"><%= most_relate.short_description %></p>
       </div>
       <div class="card-footer">
           <a href="#" class="btn btn-primary">Learn more</a>
@@ -44,4 +46,4 @@
   </div>
   <% end %>
 </div>
-<%= will_paginate @most_populars %>
+<%= will_paginate @most_relates %>
