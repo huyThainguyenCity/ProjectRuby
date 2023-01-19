@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_100326) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_042337) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,10 +60,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_100326) do
   create_table "exam_tags", force: :cascade do |t|
     t.integer "tag_id", null: false
     t.integer "exam_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["exam_id"], name: "index_exam_tags_on_exam_id"
     t.index ["tag_id"], name: "index_exam_tags_on_tag_id"
+    t.index ["user_id"], name: "index_exam_tags_on_user_id"
   end
 
   create_table "exams", force: :cascade do |t|
@@ -136,6 +138,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_100326) do
   add_foreign_key "exam_answers", "questions"
   add_foreign_key "exam_tags", "exams"
   add_foreign_key "exam_tags", "tags"
+  add_foreign_key "exam_tags", "users"
   add_foreign_key "questions", "exams"
   add_foreign_key "user_exams", "exam_answers"
   add_foreign_key "user_exams", "exams"

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
   resources :users
   resources :exams
-  get 'inprogress', to: 'exams#inprogress'
+  get 'newest', to: 'exams#newest'
   get 'completed', to: 'exams#completed'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
