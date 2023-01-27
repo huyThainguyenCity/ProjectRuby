@@ -9,6 +9,4 @@ class User < ApplicationRecord
     has_many :user_exams
     has_many :exam_tags
     has_many :exams , through: :user_exams
-    has_many :tags , through: :exam_tags
-    has_many :exams , through: :exam_tags
 end
