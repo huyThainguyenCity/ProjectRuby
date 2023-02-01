@@ -1,2 +1,47 @@
-<p>Hello</p>
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="exams">Exam</a></li>
+    <li class="breadcrumb-item"><a href="/newest">Newest</a></li>
+    <li class="breadcrumb-item"><a href="/completed", >Completed</a></li>
+  </ol>
+</nav>
 
+<h1> New examination </h1>
+
+<div class="row row-cols-md-3 g-4">
+<% @exams.each do |exam| %>
+  <div class="col">
+    <div class="card h-100">
+      <img src="<%= exam.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= exam.name %></h5>
+        <p class="card-text"><%= exam.short_description %></p>
+      </div>
+      <div class="card-footer">
+          <%= link_to 'Learn more', exam , class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @exams %>
+
+<h1> Most popular </h1>
+
+<div class="row row-cols-md-3 g-4">
+<% @most_populars.each do |most_popular| %>
+  <div class="col">
+    <div class="card h-100">
+      <img src="<%= most_popular.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= most_popular.name %></h5>
+        <p class="card-text"><%= most_popular.short_description %></p>
+      </div>
+      <div class="card-footer">
+          <%= link_to 'Learn more', most_popular , class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @most_populars %>

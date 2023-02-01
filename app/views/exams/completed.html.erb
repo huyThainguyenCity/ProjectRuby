@@ -1,0 +1,49 @@
+<h1> Ngoc ngo </h1>
+
+<nav style="--bs-breadcrumb-divider: '';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="exams">Exam</a></li>
+    <li class="breadcrumb-item"><a href="/newest">Newest</a></li>
+    <li class="breadcrumb-item"><a href="/completed", >Completed</a></li>
+  </ol>
+</nav>
+
+<h1> Completed </h1>
+
+<div class="row row-cols-md-3 g-4">
+<% @completes.each do |complete| %>
+  <div class="col">
+    <div class="card h-100">
+      <img src="<%= complete.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= complete.name %></h5>
+        <p class="card-text"><%= complete.short_description %></p>
+      </div>
+      <div class="card-footer">
+          <%= link_to 'Learn more', complete , class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @completes %>
+
+<h1> Most related </h1>
+
+<div class="row row-cols-md-3 g-4">
+<% @most_relates.each do |most_relate| %>
+  <div class="col">
+    <div class="card h-100">
+      <img src="<%= most_relate.image %>" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= most_relate.name %></h5>
+        <p class="card-text"><%= most_relate.short_description %></p>
+      </div>
+      <div class="card-footer">
+          <%= link_to 'Learn more', most_relate , class:"btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @most_relates %>

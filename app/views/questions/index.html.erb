@@ -1,0 +1,22 @@
+<h1> Ruby on Rails </h1>
+
+Time :<p><%= @exam.time_out %> minutes</p>
+Mark :<p><%= @exam.mark %> </p>
+
+<div class="container mt-sm-5 my-1">
+    <div class="question ml-sm-5 pl-sm-5 pt-2">
+    <% @exam.questions.each do |question| %>
+        <div class="py-2 h5"><b> <%= question.id %></b></div>
+        <div class="py-2 h5"><b> <%= question.title %></b></div>
+        <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
+        <% question.answers.each do |answer| %>
+            <label class="options">
+             <%=  radio_button_tag question.id, answer.id %>
+            <span class="checkmark"><%= answer.title %></span>
+            </label> 
+            <% end %>         
+        </div>
+    <% end %>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit">
+</div>
