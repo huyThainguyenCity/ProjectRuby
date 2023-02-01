@@ -1,4 +1,4 @@
 class ExamAnswer < ApplicationRecord
-    has_many :questions
-    has_many :answers
+    belongs_to :questions
+    belongs_to :answers
 end

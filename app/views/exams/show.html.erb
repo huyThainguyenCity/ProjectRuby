@@ -6,6 +6,11 @@
     <% @tag_exams.each do |tag_exam| %>
     <h5 class="mt-0"><%= tag_exam.name %></h5>
     <% end %>
+
+    <div class="card-footer">
+          <%= link_to 'Learn more',  exam_questions_path(@exam) , class:"btn btn-primary" %>
+    </div>  
+  
     <h5 class="mt-0"><%= @exam.name %></h5>
     <p><%= @exam.short_description %></p>
     <p><%= @exam.number_of_question %> Number of question </p>

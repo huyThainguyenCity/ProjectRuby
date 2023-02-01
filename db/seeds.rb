@@ -19,12 +19,12 @@ end
         time_out: 30,
         image: Faker::LoremFlickr.image,
         mark: 10)
-    4.times do   
+    40.times do 
         question = Question.create!(
             title: Faker::Quotes::Chiquito.sentence,
             exam_id: exam.id
         )
-        4.times do
+        10.times do
             answer = Answer.create(
                 title: Faker::Quotes::Chiquito.sentence,
                 question_id: question.id,
